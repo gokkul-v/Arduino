@@ -39,6 +39,7 @@ class DHT {
   public:
    DHT(uint8_t pin, uint8_t type, uint8_t count=6);
    void begin(void);
+<<<<<<< HEAD
    float readTemperature(bool S=false, bool force=false);
    float convertCtoF(float);
    float convertFtoC(float);
@@ -55,12 +56,27 @@ class DHT {
     uint8_t _bit, _port;
   #endif
   uint32_t _lastreadtime, _maxcycles;
+=======
+   float readTemperature(bool S=false);
+   float convertCtoF(float);
+   float convertFtoC(float);
+   float computeHeatIndex(float temperature, float percentHumidity, bool isFahrenheit=true);
+   float readHumidity(void);
+   boolean read(void);
+
+ private:
+  uint8_t data[6];
+  uint8_t _pin, _type;
+  uint32_t _lastreadtime;
+  bool _firstreading;
+>>>>>>> origin/master
   bool _lastresult;
 
   uint32_t expectPulse(bool level);
 
 };
 
+<<<<<<< HEAD
 class InterruptLock {
   public:
    InterruptLock() {
@@ -72,4 +88,6 @@ class InterruptLock {
 
 };
 
+=======
+>>>>>>> origin/master
 #endif

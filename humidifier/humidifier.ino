@@ -15,6 +15,7 @@ LiquidCrystal_SR lcd(6, 5, 9); // Pin 6 - Data Enable/ SER, Pin 5 - Clock/SCL, P
 
 DHT dht(DHTPIN, DHTTYPE);
 
+<<<<<<< HEAD
 int Hu=25;
 int Te=37;
 /* humidifier - red LED
@@ -36,6 +37,27 @@ int exhaust_on()
 int exhaust_off()
 {
   digitalWrite(12, LOW);
+=======
+float H = 30.0;
+float T = 37.5;
+
+void humidifier_on()
+{
+  pinMode(13, HIGH);
+}
+
+void humidifier_off()
+{
+  pinMode(13, LOW);
+}
+void exhaust_on()
+{
+  pinMode(14, HIGH);
+}
+void exhaust_off()
+{
+  pinMode(14, LOW);
+>>>>>>> origin/master
 }
 void setup() {
   lcd.begin(16, 2);              // Initializing LCD
@@ -46,6 +68,7 @@ void setup() {
 
 void loop() {
   // Wait a few seconds between measurements.
+<<<<<<< HEAD
 //  delay(2000);
 
   // Reading temperature or humidity takes about 250 milliseconds!
@@ -83,6 +106,38 @@ void loop() {
   {
     exhaust_off();
   }
+=======
+  delay(2000);
+
+  // Reading temperature or humidity takes about 250 milliseconds!
+  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
+  float h = dht.readHumidity();
+  // Read temperature as Celsius (the default)
+  float t = dht.readTemperature();
+  // Read temperature as Fahrenheit (isFahrenheit = true)
+  float f = dht.readTemperature(true);
+  if (isnan(h) || isnan(t) || isnan(f)) {
+    lcd.print("Failed to read from DHT sensor!");
+    return;
+  }
+lcd.print("Humidity: ");
+  lcd.print(h);
+  lcd.print(" %\t");
+  lcd.print("Temperature: ");
+  lcd.print(t);
+  lcd.print(" *C ");
+
+  if (t >= T)
+    humidifier_on();
+  else
+    humidifier_off();
+
+  if (h >= H)
+    exhaust_on();
+  else
+    exhaust_off();
+
+>>>>>>> origin/master
 
 
 
